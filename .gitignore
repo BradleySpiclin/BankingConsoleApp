@@ -1,0 +1,9 @@
+# Ignore obj and bin folders
+obj/
+bin/
+
+# Visual Studio files
+.vs/
+
+# Ignore NuGet packages folder
+packages/
