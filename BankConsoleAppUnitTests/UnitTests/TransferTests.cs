@@ -20,7 +20,7 @@ public class TransferTests
     [Test]
     public void Verify_Negative_Deposit_Is_Unsuccessful() =>
         _context
-            .AssertNegativeDepositThrowsInvalidOperationException(-100);
+            .AssertNegativeDepositThrowsInvalidOperationException();
 
     [Test]
     public void Verify_Withdraw_Is_Successful() =>
@@ -31,7 +31,7 @@ public class TransferTests
     [Test]
     public void Verify_Withdraw_Is_Unsuccessful() =>
         _context
-            .AssertWithdrawMoreThanBalanceThrowsInvalidOperationException(750);
+            .AssertWithdrawMoreThanBalanceThrowsInvalidOperationException();
 
     [Test]
     public void Verify_Transfer_Transaction_Is_Successful() =>
@@ -121,18 +121,14 @@ public class TransferTests
             Assert.That(_withdrawTransaction.Success, Is.EqualTo(true));
         }
 
-        public void AssertNegativeDepositThrowsInvalidOperationException(decimal amount) 
+        public void AssertNegativeDepositThrowsInvalidOperationException() 
         {
-            _depositTransaction = new DepositTransaction(_fromAccount, amount);
-
-            Assert.Throws<InvalidOperationException>(() => _depositTransaction.Execute());
+            Assert.That(() => new DepositTransaction(_fromAccount, -1000), Throws.TypeOf<ArgumentException>());
         }
 
-        public void AssertWithdrawMoreThanBalanceThrowsInvalidOperationException(decimal amount) 
+        public void AssertWithdrawMoreThanBalanceThrowsInvalidOperationException() 
         {
-            _withdrawTransaction = new WithdrawTransaction(_fromAccount, amount);
-
-            Assert.Throws<InvalidOperationException>(() => _withdrawTransaction.Execute());
+            Assert.That(() => new WithdrawTransaction(_fromAccount, int.MaxValue), Throws.TypeOf<ArgumentException>());
         }
     }
 }

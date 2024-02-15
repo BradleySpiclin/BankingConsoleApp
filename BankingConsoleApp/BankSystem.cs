@@ -100,7 +100,7 @@ public class BankSystem
 
     private static void AddNewAccount(Bank bank)
     {
-        Account newAccount = new Account(ConsoleInput.GetString("Account name: "), ConsoleInput.GetDecimal("Opening balance: "));
+        var newAccount = new Account(ConsoleInput.GetString("Account name: "), ConsoleInput.GetDecimal("Opening balance: "));
         bank.AddAccount(newAccount);
         Console.WriteLine($"New account: {newAccount.Name} created.");
     }
@@ -115,10 +115,13 @@ public class BankSystem
     private static void DoDeposit(Bank bank)
     {
         var bankAccount = FindAccount(bank, "Account name: ");
+
         if (bankAccount != null)
         {
-            decimal depositAmount = ConsoleInput.GetDecimal("Enter deposit amount: ");
+            var depositAmount = ConsoleInput.GetDecimal("Enter deposit amount: ");
+
             var depositTransaction = new DepositTransaction(bankAccount, depositAmount);
+
             try
             {
                 bank.ExecuteTransaction(depositTransaction);
@@ -138,10 +141,12 @@ public class BankSystem
     private static void DoWithdraw(Bank bank)
     {
         var bankAccount = FindAccount(bank, "Account name: ");
+
         if (bankAccount != null)
         {
-            decimal withdrawAmount = ConsoleInput.GetDecimal("Enter withdraw amount: ");
+            var withdrawAmount = ConsoleInput.GetDecimal("Enter withdraw amount: ");
             var withdrawTransaction = new WithdrawTransaction(bankAccount, withdrawAmount);
+
             try
             {
                 bank.ExecuteTransaction(withdrawTransaction);
@@ -176,9 +181,9 @@ public class BankSystem
             return;
         }
 
-        decimal transferAmount = ConsoleInput.GetDecimal("Enter transfer amount: ");
+        var transferAmount = ConsoleInput.GetDecimal("Enter transfer amount: ");
 
-        TransferTransaction transferTransaction = new TransferTransaction(fromAccount, toAccount, transferAmount);
+        var transferTransaction = new TransferTransaction(fromAccount, toAccount, transferAmount);
 
         try
         {

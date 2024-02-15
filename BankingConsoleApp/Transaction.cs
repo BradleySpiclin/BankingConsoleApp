@@ -29,6 +29,9 @@ public abstract class Transaction
     {
         _transactionId = Guid.NewGuid();
 
+        if (amount <= 0)
+            throw new ArgumentException("Deposit amount must be greater than 0");
+
         _amount = amount;
     }
 

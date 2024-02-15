@@ -9,6 +9,9 @@ public class WithdrawTransaction : Transaction
     public WithdrawTransaction(Account account, decimal amount) : base(amount)
     {
         _account = account;
+
+        if (amount > _account.Balance)
+            throw new ArgumentException("Cannot withdraw more than balance.");
     }
 
     public override void Print()
