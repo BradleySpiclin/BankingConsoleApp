@@ -1,4 +1,8 @@
-﻿namespace BankingConsoleApp;
+﻿using BankApplication.Definitions;
+using BankApplication.Domain;
+using BankApplication.Interfaces;
+
+namespace BankApplication.Application;
 
 public class Bank : IBank
 {
@@ -24,7 +28,7 @@ public class Bank : IBank
 
     public void RollbackTransaction(Transaction transaction)
     {
-        transaction.Rollback();
+        //transaction.Rollback();
     }
 
     public void PrintTransactionHistory()
@@ -33,7 +37,7 @@ public class Bank : IBank
 
         foreach (var transaction in _transactions)
         {
-            Console.WriteLine($"{itemNumber}: {transaction.GetType().Name} | {PrintStatus(transaction.Success)} on: {transaction.DateStamp}");
+            //Console.WriteLine($"{itemNumber}: {transaction.GetType().Name} | {PrintStatus(transaction.Success)} on: {transaction.DateStamp}");
             itemNumber++;
         }
     }

@@ -1,15 +1,15 @@
-﻿namespace BankingConsoleApp;
+﻿namespace BankApplication.Domain;
 
 public class Account
 {
-    private decimal _balance;
-    private string _name;
+    private readonly string _name;
+    private readonly long _accountNumber;
 
-    public string Name
-    {
-        get { return _name; }
-        private set { _name = value; }
-    }
+    private decimal _balance;
+
+    public string Name => _name;
+
+    public long AccountNumber => _accountNumber;
 
     public decimal Balance
     {
@@ -17,10 +17,11 @@ public class Account
         private set { _balance = value; }
     }
 
-    public Account(string name, decimal balance)
+    public Account(string name, decimal openingBalance)
     {
-        Balance = balance;
-        Name = name;
+        _balance = openingBalance;
+        _name = name;
+        _accountNumber = GenerateAccountNumber();
     }
 
     public bool Deposit(decimal amount)
@@ -48,6 +49,12 @@ public class Account
     public void Print()
     {
         Console.WriteLine($"Account: {Name}\nBalance: {Balance:c2}\n");
+    }
+
+    private static long GenerateAccountNumber()
+    {
+        Random random = new();
+        return random.Next(100000000, 1000000000);
     }
 }
 

@@ -1,7 +1,7 @@
-using BankingConsoleApp;
+using BankApplication.Domain;
 using NUnit.Framework;
 
-namespace BankConsoleAppUnitTests.UnitTests;
+namespace BankApplicationTests.UnitTests;
 
 [TestFixture]
 public class DepositWithdrawTests

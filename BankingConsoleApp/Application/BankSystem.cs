@@ -1,6 +1,7 @@
-﻿using BankingConsoleApp.Extensions;
+﻿using BankApplication.Domain;
+using BankingConsoleApp.Extensions;
 
-namespace BankingConsoleApp;
+namespace BankApplication.Application;
 
 public enum MenuOption
 {
@@ -120,7 +121,7 @@ public class BankSystem
         {
             var depositAmount = ConsoleInput.GetDecimal("Enter deposit amount: ");
 
-            var depositTransaction = new DepositTransaction(bankAccount, depositAmount);
+            var depositTransaction = new Deposit(bankAccount, depositAmount);
 
             try
             {
@@ -145,7 +146,7 @@ public class BankSystem
         if (bankAccount != null)
         {
             var withdrawAmount = ConsoleInput.GetDecimal("Enter withdraw amount: ");
-            var withdrawTransaction = new WithdrawTransaction(bankAccount, withdrawAmount);
+            var withdrawTransaction = new Withdraw(bankAccount, withdrawAmount);
 
             try
             {
@@ -183,16 +184,16 @@ public class BankSystem
 
         var transferAmount = ConsoleInput.GetDecimal("Enter transfer amount: ");
 
-        var transferTransaction = new TransferTransaction(fromAccount, toAccount, transferAmount);
+        var transferTransaction = new Transfer(fromAccount, toAccount, transferAmount);
 
         try
         {
             bank.ExecuteTransaction(transferTransaction);
 
-            if (transferTransaction.Success)
+            /*if (transferTransaction.Success)
             {
                 transferTransaction.Print();
-            }
+            }*/
         }
         catch (InvalidOperationException ex)
         {

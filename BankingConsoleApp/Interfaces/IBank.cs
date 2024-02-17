@@ -1,4 +1,7 @@
-﻿namespace BankingConsoleApp;
+﻿using BankApplication.Definitions;
+using BankApplication.Domain;
+
+namespace BankApplication.Interfaces;
 
 public interface IBank
 {

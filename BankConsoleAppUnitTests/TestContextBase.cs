@@ -1,4 +1,4 @@
-﻿namespace BankConsoleAppUnitTests;
+﻿namespace BankApplicationTests;
 
 
 // I probably want a test base class once this gets built out a bit more
