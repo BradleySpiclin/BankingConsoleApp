@@ -14,4 +14,8 @@ public class Transfer : Transaction
         _toAccount = toAccount;
     }
 
+    public override void Execute()
+    {
+        throw new NotImplementedException();
+    }
 }

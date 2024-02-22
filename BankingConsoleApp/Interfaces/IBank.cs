@@ -7,15 +7,13 @@ public interface IBank
 {
     public void AddAccount(Account account);
 
-    public Account GetAccount(string accountName);
+    public bool GetAccount(long accountNumber);
 
-    public void ExecuteTransaction(Transaction transaction);
+    public bool GetPin(int pinNumber);
 
-    public void RollbackTransaction(Transaction transaction);
+    public Account AccessAccount(bool isAuthorised);
 
-    public void PrintTransactionHistory();
-
-    public Transaction GetTransactionAtIndex(int index);
+    public void ExecuteTransaction(Account account, Transaction transaction);
 
     public string PrintStatus(bool status);
 }

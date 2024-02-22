@@ -1,10 +1,12 @@
-﻿namespace BankApplication.Domain;
+﻿using BankApplication.Definitions;
+
+namespace BankApplication.Domain;
 
 public class Account
 {
+    private readonly List<Transaction> _transactions = [];
     private readonly string _name;
     private readonly long _accountNumber;
-
     private decimal _balance;
 
     public string Name => _name;
@@ -49,6 +51,19 @@ public class Account
     public void Print()
     {
         Console.WriteLine($"Account: {Name}\nBalance: {Balance:c2}\n");
+    }
+
+    public void RecordTransaction(Transaction transaction) 
+    {
+        _transactions.Add(transaction);
+    }
+
+    public void DisplayTransactionHistory() 
+    {
+        foreach (var transaction in _transactions)
+        {
+            //transaction.Print();
+        }
     }
 
     private static long GenerateAccountNumber()

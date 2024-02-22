@@ -1,22 +1,23 @@
-﻿using System.Runtime.InteropServices.Marshalling;
-
-namespace BankApplication.Definitions;
+﻿namespace BankApplication.Definitions;
 
 public abstract class Transaction
 {
-    public Guid Id { get; }
-    public decimal Amount { get; }
-    public DateTime Date { get; }
+    private readonly Guid _Id;
+    private readonly decimal _amount;
+    private readonly DateTime _created;
+    private DateTime _modified;
 
     protected Transaction(decimal amount)
     {
-        Id = Guid.NewGuid();
-        Amount = amount;
-        Date = DateTime.Now;
+        _Id = Guid.NewGuid();
+        _amount = amount;
+        _created = DateTime.Now;
     }
 
-    public virtual void Execute() { }
+    public abstract void Execute();
 
-    public virtual void Print() { }
-
+    private void Print() 
+    {
+        Console.WriteLine($"{GetType().Name} : Created - {_created} : Modified {_modified}");
+    }
 }

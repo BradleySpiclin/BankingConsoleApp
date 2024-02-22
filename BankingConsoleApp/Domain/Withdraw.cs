@@ -14,4 +14,9 @@ public class Withdraw : Transaction
         if (amount > _account.Balance)
             throw new ArgumentException("Cannot withdraw more than balance.");
     }
+
+    public override void Execute()
+    {
+        throw new NotImplementedException();
+    }
 }
