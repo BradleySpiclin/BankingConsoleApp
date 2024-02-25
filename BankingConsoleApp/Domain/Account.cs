@@ -5,13 +5,15 @@ namespace BankApplication.Domain;
 public class Account
 {
     private readonly List<Transaction> _transactions = [];
-    private readonly string _name;
-    private readonly long _accountNumber;
+    private readonly string _firstName;
+    private readonly string _lastName;
+    private readonly int _pin;
+
     private decimal _balance;
 
-    public string Name => _name;
-
-    public long AccountNumber => _accountNumber;
+    public string FirstName => _firstName;
+    public string LastName => _lastName;
+    public int Pin => _pin;
 
     public decimal Balance
     {
@@ -19,11 +21,12 @@ public class Account
         private set { _balance = value; }
     }
 
-    public Account(string name, decimal openingBalance)
+    public Account(string firstName, string lastName, decimal openingBalance, int pin)
     {
         _balance = openingBalance;
-        _name = name;
-        _accountNumber = GenerateAccountNumber();
+        _firstName = firstName;
+        _lastName = lastName;
+        _pin = pin;
     }
 
     public bool Deposit(decimal amount)
@@ -50,7 +53,7 @@ public class Account
 
     public void Print()
     {
-        Console.WriteLine($"Account: {Name}\nBalance: {Balance:c2}\n");
+        
     }
 
     public void RecordTransaction(Transaction transaction) 
@@ -64,12 +67,6 @@ public class Account
         {
             //transaction.Print();
         }
-    }
-
-    private static long GenerateAccountNumber()
-    {
-        Random random = new();
-        return random.Next(100000000, 1000000000);
     }
 }
 

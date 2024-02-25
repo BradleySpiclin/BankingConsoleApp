@@ -29,7 +29,7 @@ public class TransferTests
             .AssertDepositIsSuccessful();
 
     [Test]
-    public void Verify_Withdraw_Is_Unsuccessful() =>
+    public void Verify_Withdraw_More_Than_Balance_Is_Unsuccessful() =>
         _context
             .AssertWithdrawMoreThanBalanceThrowsInvalidOperationException();
 
@@ -56,9 +56,9 @@ public class TransferTests
 
         private TestContext ArrangeAccounts() 
         {
-            _fromAccount = new Account("From Account", 0);
+            _fromAccount = new Account("From Account", "", 0, 0000);
 
-            _toAccount = new Account("To Account", 0);
+            _toAccount = new Account("To Account", "", 0, 0000);
 
             return this;
         }

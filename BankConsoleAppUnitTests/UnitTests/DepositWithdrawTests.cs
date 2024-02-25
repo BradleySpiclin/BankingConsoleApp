@@ -45,7 +45,7 @@ public class DepositWithdrawTests
 
         public TestContext() 
         {
-            _account = new Account("Test Account", 0);
+            _account = new Account("Test Account", "", 0, 0000);
         }
 
         public TestContext ArrangeDepositAmount(decimal amount) 

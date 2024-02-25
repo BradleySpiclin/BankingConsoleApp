@@ -1,10 +1,12 @@
 ﻿using BankApplication.Domain;
 using BankApplication.Extensions;
+using BankingConsoleApp.Extensions;
 
 namespace BankApplication.Application;
 
 public class BankMenu
 {
+    private readonly Dictionary<long, Account> _accounts = [];
     private readonly Dictionary<MainMenuOption, Action> _menuOptions;
 
     public BankMenu()
@@ -44,7 +46,7 @@ public class BankMenu
             Console.WriteLine($"{(int)option.Key}. {option.Key.ToDisplayString()}");
         }
 
-        Console.Write("Selection: ");
+        Console.Write("\nSelection: ");
     }
 
     private bool TryGetSelectedOption(out MainMenuOption selectedOption)
@@ -59,12 +61,39 @@ public class BankMenu
 
     private void AccessAccount()
     {
+
         Console.WriteLine("Accessing account...");
+
+        var accountNumber = ConsoleInput.GetLong("Enter account number: ");
+
+        if (!_accounts.TryGetValue(accountNumber, out Account account))
+        {
+            Console.WriteLine("Account not found.");
+            Console.ReadKey();
+            return;
+        }
+
+        var pinNumber = ConsoleInput.GetPinNumber("Enter 4 digit PIN: ");
+
+        if (account.Pin != pinNumber) 
+        {
+            Console.WriteLine("Access denied.");
+            Console.ReadKey();
+            return;
+        }
+
+        var accountMenu = new AccountMenu(account);
+
+        accountMenu.Run();
     }
 
     private void OpenAccount()
     {
         Console.WriteLine("Opening account...");
+
+        var account = AccountBuilder.Build();
+
+        _accounts.Add(account.AccountNumber, account.Account);
     }
 
     private void QuitApplication()

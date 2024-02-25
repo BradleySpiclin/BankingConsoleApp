@@ -14,11 +14,11 @@ public class Bank : IBank
         _accounts.Add(account);
     }
 
-    public Account GetAccount(string accountName)
+/*    public Account GetAccount(string accountName)
     {
         return _accounts
             .FirstOrDefault(account => account.Name == accountName);
-    }
+    }*/
 
     public void ExecuteTransaction(Account account, Transaction transaction)
     {
